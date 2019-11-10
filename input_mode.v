@@ -9,6 +9,7 @@ module inp(input_val,instrMem);
 	assign inp_num = 0;
 	always @(but_inp) begin
 		assign instrMem[inp_num] = input_val;
+		$display("%b",instrMem[inp_num]);
 		assign inp_num = inp_num + 1;
 	end
 
