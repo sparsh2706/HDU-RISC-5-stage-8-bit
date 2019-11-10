@@ -11,31 +11,44 @@
 `define r6 3'b110
 `define r7 3'b111
  
-module check(clk,instrMem,hazardMem)
+module check(clk,instrMem,hazardMem,size)
 	
 	input clk,instrMem;
-	output hazardMem;
+	output hazardMem,size;
 
 	reg [7:0] instrMem[7:0];
-	wire [5:0] hazardMem[7:0];	//integer-------2bitx8
+	integer [5:0] hazardMem[7:0];	//integer-------2bitx8
 	wire [1:0] opc[7:0]; 		//reg0
 	wire [2:0] rs[7:0];			//reg1
 	wire [2:0] rd[7:0];			//reg2
-	wire []
+
+	integer size = $size(hazardMem);
 
 	for(i=0;i<$size(instrMem);i++) 
 	begin
-		opc[i] = instrMem[7:6];		//for store demarcate
+		opc[i] = instrMem[7:6];		
 	end
 
 	for(i=0;i<$size(instrMem);i++) 
 	begin
-		rs[i] = instrMem[5:3];
+		if(opc[i] == sw)
+		begin
+			rs[i] = instrMem[2:0];
+		end
+		else begin
+			rs[i] = instrMem[5:3];
+		end
 	end
 
 	for(i=0;i<$size(instrMem);i++) 
 	begin
-		rd[i] = instrMem[2:0];
+		if(opc[i] == sw)
+		begin
+			rd[i] = instrMem[2:0];
+		end
+		else begin
+			rd[i] = instrMem[5:3];
+		end
 	end
 
 	for(i=0;i<$size(instrMem) - 2;i++) 
