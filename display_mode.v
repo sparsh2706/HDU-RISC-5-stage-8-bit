@@ -27,7 +27,7 @@ module disp(hazardMem);
 		sh = hazardMem[57:56];
 		i = ob[1];
 		if(ob[1] != ob[0]) begin
-			$display("%b %b RAW %b",ob[0],ob[1],sh);
+			$display("%b %b RAW",ob[0],ob[1]);
 		end
 			
 	//Error 2
