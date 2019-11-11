@@ -11,25 +11,31 @@
 `define r6 3'b110
 `define r7 3'b111
  
-module check(clk,instrMem,hazardMem,size)
+module check(instrMemBits,hazardMem,size)
 	
-	input clk,instrMem;
+	input instrMemBits;
 	output hazardMem,size;
 
 	reg [7:0] instrMem[7:0];
-	integer [5:0] hazardMem[7:0];	//integer-------2bitx8
+	integer [7:0] hazardMem[];	//integer-------2bitx8
 	wire [1:0] opc[7:0]; 		//reg0
 	wire [2:0] rs[7:0];			//reg1
 	wire [2:0] rd[7:0];			//reg2
 
-	integer size = $size(hazardMem);
+	integer k = 63;
+	integer i;
+	for(i = 0;i<$bits(instrMemBits);i = i + 1)
+	begin
+		instrMem[i] <= instrMemBits[k:k-7];
+		k <= k - 8;	
+	end
 
-	for(i=0;i<$size(instrMem);i++) 
+	for(i=0;i<$size(instrMem);i = i + 1) 
 	begin
 		opc[i] = instrMem[7:6];		
 	end
 
-	for(i=0;i<$size(instrMem);i++) 
+	for(i=0;i<$size(instrMem);i = i + 1) 
 	begin
 		if(opc[i] == sw)
 		begin
@@ -40,7 +46,7 @@ module check(clk,instrMem,hazardMem,size)
 		end
 	end
 
-	for(i=0;i<$size(instrMem);i++) 
+	for(i=0;i<$size(instrMem);i = i + 1) 
 	begin
 		if(opc[i] == sw)
 		begin
@@ -50,26 +56,30 @@ module check(clk,instrMem,hazardMem,size)
 			rd[i] = instrMem[5:3];
 		end
 	end
-
-	for(i=0;i<$size(instrMem) - 2;i++) 
+	wire assigned;
+	for(i=0;i<$size(instrMem) - 2;i = i + 1) 
 	begin
 		
 		if(rd[i] == rs[i+1])
 		begin
-			hazardMem.push_back({i,i+1});
+			assign assigned = i;
+			hazardMem.push_back({assigned,assigned+1,3'b01});
 		end
 
 		if(rd[i] == rs[i+2] && opc[i] == add)
 		begin
-			hazardMem.push_back({i,i+2});
+			assign assigned = i;
+			hazardMem.push_back({assigned,assigned+2,3'b01});
 		end
 
 	end
 
 	if(rd[instrMem[$size(instrMem) - 2] == instrMem[$size(instrMem)])
 	begin
-		hazardMem.push_back({$size(instrMem)-1,$size(instrMem)});
+		assign assigned = $size(instrMem);
+		hazardMem.push_back({assigned-1,assigned,3'b01});
 	end
 
+	integer size = $size(hazardMem);
 
 endmodule
