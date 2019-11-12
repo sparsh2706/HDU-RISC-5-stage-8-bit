@@ -1,16 +1,3 @@
-`define lw 2'b11
-`define sw 2'b10
-`define add 2'b01
-`define noop 2'b00
-
-`define r0 3'b000
-`define r1 3'b001
-`define r2 3'b010
-`define r3 3'b011
-`define r4 3'b100
-`define r5 3'b101
-`define r6 3'b110
-`define r7 3'b111
 module inp(input_val,instrMemBits,but_inp);
 	input [7:0] input_val;
 	input but_inp;
@@ -19,7 +6,6 @@ module inp(input_val,instrMemBits,but_inp);
 
 	always @(but_inp) begin
 		instrMemBits = {instrMemBits,input_val};
-		// $display("Instruction bits till now are : %b",instrMemBits);
 	end
 
 endmodule
@@ -28,14 +14,14 @@ module check(instrMemBits,hazardMemBits,input_val,but_inp);
 	
 	input wire [63:0] instrMemBits;
 	input [7:0] input_val;
-	input but_inp,but_check;
+	input but_inp;
 	output reg [103:0] hazardMemBits;
 
 	inp testing (.input_val(input_val),.instrMemBits(instrMemBits),.but_inp(but_inp));
 
-	reg [1:0] opc[7:0]; 		//reg0
-	reg [2:0] rs[7:0];			//reg1
-	reg [2:0] rd[7:0];			//reg2
+	reg [1:0] opc[7:0]; 		// Opcode
+	reg [2:0] rs[7:0];			// Register 1
+	reg [2:0] rd[7:0];			// Register 2
 
 	integer k = 63;
 	wire [2:0] i;
@@ -46,7 +32,7 @@ module check(instrMemBits,hazardMemBits,input_val,but_inp);
 		begin
 	// ************************************************ Defining the OpCodes ***************************************************
 				
-				// $display("Imma here");
+			
 			opc[0] = instrMemBits[63:62];
 			opc[1] = instrMemBits[55:54];
 			opc[2] = instrMemBits[47:46];
@@ -195,7 +181,6 @@ module check(instrMemBits,hazardMemBits,input_val,but_inp);
 			begin
 				if(opc[i] != 2'b00)
 				begin		
-				// $display("Imma here = %b",rd[i]);
 					if(rd[i] == rs[i+1] && opc[i+1] != 2'b01)
 					begin
 						hazardMemBits = {hazardMemBits,i,i+3'b001,2'b01};
@@ -323,7 +308,6 @@ module check(instrMemBits,hazardMemBits,input_val,but_inp);
 			if(ob[1] != ob[0]) begin
 				$display("%d %d RAW",ob[1],ob[0]);
 			end
-
 		end
 	end
 
