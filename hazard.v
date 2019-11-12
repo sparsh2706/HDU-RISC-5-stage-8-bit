@@ -1,5 +1,7 @@
 `timescale 1 ps / 100 fs
 
+// **************** This is Not Connected right now ****************************************
+
 module hazard(btn1,btn2,btn3,btn4);
 	
 	input btn1,btn2,btn3,btn4;
