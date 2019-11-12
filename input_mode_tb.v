@@ -4,7 +4,7 @@ module inp_tb();
 	 reg but_inp;
 	 reg but_check;
 	 wire [63:0] instrMemBits;
-	 wire [63:0] hazardMemBits;
+	 wire [103:0] hazardMemBits;
 	 integer i;
 
 	// inp testing (.input_val(input_val),.instrMemBits(instrMemBits),.but_inp(but_inp));
@@ -39,8 +39,8 @@ module inp_tb();
 	 	but_inp = 1;
 	 	#1000
 		// $display("Instruction bits Finally are : %b",(instrMemBits));	
-		but_check = 1;
-		#10000
+		// but_check = 1;
+
 		// $display("Hazard bits is: %b",hazardMemBits);	
 
 	 	$finish;

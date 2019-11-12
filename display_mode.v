@@ -1,26 +1,10 @@
 module disp(hazardMem);
 
-	// input clk;
-	// input hazardMem[1:0][7:0];
-	// output avail;
-	// integer avail;
-	// integer r1,r2;
-	// integer clk_num;
-	// clk_num = 0;
-	// always @(posedge clk) begin
-	// 	$display("%b %b",hazardMem[0][clk_num],hazardMem[1][clk_num]);
-	// 	assign clk_num = clk_num+1;
-	// end
-
-	input wire [63:0] hazardMem; //64 bit all error codes ----- to be flattened
-
-	//wire hazardMem;
+	input wire [104:0] hazardMem;
 
 	reg [2:0] ob[1:0];	//flattening
-	reg [1:0] sh;
-	wire i;
 	always @(*) begin
-//**********************************error decode**************************
+	//**********************************error decode**************************
 	
 		ob[1] =  hazardMem[103:101];
 		ob[0] =  hazardMem[100:98];
@@ -99,21 +83,5 @@ module disp(hazardMem);
 		if(ob[1] != ob[0]) begin
 			$display("%d %d RAW",ob[0],ob[1]);
 		end
-
-		// poss[4] =  hazardMem[39:32];
-		// poss[3] =  hazardMem[31:24];
-		// poss[2] =  hazardMem[23:16];
-		// poss[1] =  hazardMem[15:8];
-		// poss[0] =  hazardMem[7:0];	
 	end
-
-	// integer i;
-	// initial begin
-	// 	i = pos[0][63:61];
-	// 	$display("%b RAW", i);	
-	// end
-	
-	
-
-
 endmodule

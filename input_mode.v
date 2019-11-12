@@ -29,7 +29,7 @@ module check(instrMemBits,hazardMemBits,input_val,but_inp);
 	input wire [63:0] instrMemBits;
 	input [7:0] input_val;
 	input but_inp,but_check;
-	output reg [63:0] hazardMemBits;
+	output reg [103:0] hazardMemBits;
 
 	inp testing (.input_val(input_val),.instrMemBits(instrMemBits),.but_inp(but_inp));
 
@@ -39,8 +39,7 @@ module check(instrMemBits,hazardMemBits,input_val,but_inp);
 
 	integer k = 63;
 	wire [2:0] i;
-	reg assigned;
-	///if ($size(instrMemBits)==64) begin
+	reg [2:0] ob[1:0];
 	always @(*)
 	begin
 		if(instrMemBits[63] == 1'b0 || instrMemBits[63] == 1'b1)
@@ -205,27 +204,127 @@ module check(instrMemBits,hazardMemBits,input_val,but_inp);
 					begin
 						hazardMemBits = {hazardMemBits,i,i+3'b001,2'b01};
 					end
+					else begin
+						hazardMemBits = {hazardMemBits,3'b000,3'b000,2'b00};						
+					end
 
 					if((rd[i] == rs[i+2] || rd[i] == rd[i+2]) && opc[i+2] == 2'b01)
 					begin
 						hazardMemBits = {hazardMemBits,i,i+3'b010,2'b01};
 					end
-					// else begin
-					// 	hazardMemBits = {hazardMemBits,i,i+3'b000,2'b01};
-					// end
+					else begin
+						hazardMemBits = {hazardMemBits,3'b000,3'b000,2'b00};
+					end
+				end
+				else begin
+					hazardMemBits = {hazardMemBits,3'b000,3'b000,2'b00};
+					hazardMemBits = {hazardMemBits,3'b000,3'b000,2'b00};
 				end
 			end
 
-			if(opc[6] !=  2'b00)
+			if(opc[3'b110] !=  2'b00)
 			begin
-				if(rd[6] == rs[7])
+				if(rd[3'b110] == rs[3'b111])
 				begin
 					hazardMemBits = {hazardMemBits,3'b110,3'b111,2'b01};	
 				end
+				else begin
+					hazardMemBits = {hazardMemBits,3'b000,3'b000,2'b00};
+				end
 			end
+			else begin
+				hazardMemBits = {hazardMemBits,3'b000,3'b000,2'b00};	
+			end
+
 
 		$display("Hazard bits is: %b",hazardMemBits);	
 		end	
+	end
+
+
+	always @(*)
+	begin
+		if(hazardMemBits[103] == 1'b0 || hazardMemBits[103] == 1'b1)
+		begin
+			ob[1] =  hazardMemBits[103:101];
+			ob[0] =  hazardMemBits[100:98];
+			if(ob[1] != ob[0]) begin
+				$display("%b %b RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[95:93];
+			ob[0] =  hazardMemBits[92:90];
+			if(ob[1] != ob[0]) begin
+				$display("%b %b RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[87:85];
+			ob[0] =  hazardMemBits[84:82];
+			if(ob[1] != ob[0]) begin
+				$display("%b %b RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[79:77];
+			ob[0] =  hazardMemBits[76:74];
+			if(ob[1] != ob[0]) begin
+				$display("%b %b RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[71:69];
+			ob[0] =  hazardMemBits[68:66];
+			if(ob[1] != ob[0]) begin
+				$display("%b %b RAW",ob[0],ob[1]);
+			end
+			
+			ob[1] =  hazardMemBits[63:61];
+			ob[0] =  hazardMemBits[60:58];
+			if(ob[1] != ob[0]) begin
+				$display("%b %b RAW",ob[0],ob[1]);
+			end
+				
+			ob[1] =  hazardMemBits[55:53];
+			ob[0] =  hazardMemBits[52:50];
+			if(ob[1] != ob[0]) begin
+				$display("%d %d RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[47:45];
+			ob[0] =  hazardMemBits[44:42];
+			if(ob[1] != ob[0]) begin
+				$display("%d %d RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[39:37];
+			ob[0] =  hazardMemBits[36:34];
+			if(ob[1] != ob[0]) begin
+				$display("%d %d RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[31:29];
+			ob[0] =  hazardMemBits[29:27];
+			if(ob[1] != ob[0]) begin
+				$display("%d %d RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[23:21];
+			ob[0] =  hazardMemBits[20:18];
+			if(ob[1] != ob[0]) begin
+				$display("%d %d RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[15:13];
+			ob[0] =  hazardMemBits[12:10];
+			if(ob[1] != ob[0]) begin
+				$display("%d %d RAW",ob[0],ob[1]);
+			end
+
+			ob[1] =  hazardMemBits[7:5];
+			ob[0] =  hazardMemBits[4:2];
+			if(ob[1] != ob[0]) begin
+				$display("%d %d RAW",ob[0],ob[1]);
+			end
+
+		end
 	end
 
 endmodule
