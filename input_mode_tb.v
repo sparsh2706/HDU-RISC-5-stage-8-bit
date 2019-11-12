@@ -2,50 +2,48 @@ module inp_tb();
 
 	 reg [7:0] input_val;
 	 reg but_inp;
+	 reg but_check;
 	 wire [63:0] instrMemBits;
 	 wire [63:0] hazardMemBits;
 	 integer i;
 
-	 inp testing (.input_val(input_val),.instrMemBits(instrMemBits),.but_inp(but_inp));
+	// inp testing (.input_val(input_val),.instrMemBits(instrMemBits),.but_inp(but_inp));
+	check Checking (.instrMemBits(instrMemBits),.hazardMemBits(hazardMemBits),.input_val(input_val),.but_inp(but_inp));
 
 	 initial begin
+
 	 	but_inp = 1;
-	 	input_val = 8'b10001000;
+
+	 	input_val = 8'b11001010;
 	 	but_inp = 0;
 	 	#1000
-	 	input_val = 8'b10001001;
+	 	input_val = 8'b11011100;
 	 	but_inp = 1;
 	 	#1000
-	 	input_val = 8'b10001010;
+	 	input_val = 8'b01011001;
 	 	but_inp = 0;
 	 	#1000
-	 	input_val = 8'b10001100;
+	 	input_val = 8'b10011110;
 	 	but_inp = 1;
 	 	#1000
-	 	input_val = 8'b10010000;
+	 	input_val = 8'b00000000;
 	 	but_inp = 0;
 	 	#1000
-	 	input_val = 8'b10101000;
+	 	input_val = 8'b00000000;
 	 	but_inp = 1;
 	 	#1000
-	 	input_val = 8'b10001001;
+	 	input_val = 8'b00000000;
 	 	but_inp = 0;
 	 	#1000
-	 	input_val = 8'b11111111;
+	 	input_val = 8'b00000000;
 	 	but_inp = 1;
 	 	#1000
-		// $display("Instruction bits Finally are : %d",$bits(instrMemBits));
-		#1000
-	 	
+		// $display("Instruction bits Finally are : %b",(instrMemBits));	
+		but_check = 1;
+		#10000
+		// $display("Hazard bits is: %b",hazardMemBits);	
+
 	 	$finish;
 	 end
-	 	check Checking (.instrMemBits(instrMemBits),.hazardMemBits(hazardMemBits));
-
-	 	initial
-	 	begin
-	 		#9000
-	 		$display("Hazard Bits are : %b",hazardMemBits);
-	 	end
-
 
 endmodule
