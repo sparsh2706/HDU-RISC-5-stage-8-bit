@@ -18,72 +18,84 @@ module disp(hazardMem);
 
 	reg [2:0] ob[1:0];	//flattening
 	reg [1:0] sh;
-	integer i;
+	wire i;
 	always @(*) begin
 //**********************************error decode**************************
-	//Error 1
+	
+		ob[1] =  hazardMem[103:101];
+		ob[0] =  hazardMem[100:98];
+		if(ob[1] != ob[0]) begin
+			$display("%b %b RAW",ob[0],ob[1]);
+		end
+
+		ob[1] =  hazardMem[95:93];
+		ob[0] =  hazardMem[92:90];
+		if(ob[1] != ob[0]) begin
+			$display("%b %b RAW",ob[0],ob[1]);
+		end
+
+		ob[1] =  hazardMem[87:85];
+		ob[0] =  hazardMem[84:82];
+		if(ob[1] != ob[0]) begin
+			$display("%b %b RAW",ob[0],ob[1]);
+		end
+
+		ob[1] =  hazardMem[79:77];
+		ob[0] =  hazardMem[76:74];
+		if(ob[1] != ob[0]) begin
+			$display("%b %b RAW",ob[0],ob[1]);
+		end
+
+		ob[1] =  hazardMem[71:69];
+		ob[0] =  hazardMem[68:66];
+		if(ob[1] != ob[0]) begin
+			$display("%b %b RAW",ob[0],ob[1]);
+		end
+		
 		ob[1] =  hazardMem[63:61];
 		ob[0] =  hazardMem[60:58];
-		sh = hazardMem[57:56];
-		i = ob[1];
 		if(ob[1] != ob[0]) begin
 			$display("%b %b RAW",ob[0],ob[1]);
 		end
 			
-	//Error 2
 		ob[1] =  hazardMem[55:53];
 		ob[0] =  hazardMem[52:50];
-		sh = hazardMem[49:48];
-		i = ob[1];
 		if(ob[1] != ob[0]) begin
 			$display("%d %d RAW",ob[0],ob[1]);
 		end
 
-		//Error 3
 		ob[1] =  hazardMem[47:45];
 		ob[0] =  hazardMem[44:42];
-		sh = hazardMem[41:40];
-		i = ob[1];
 		if(ob[1] != ob[0]) begin
 			$display("%d %d RAW",ob[0],ob[1]);
 		end
-		//Error 4
+
 		ob[1] =  hazardMem[39:37];
 		ob[0] =  hazardMem[36:34];
-		sh = hazardMem[33:32];
-		i = ob[1];
 		if(ob[1] != ob[0]) begin
 			$display("%d %d RAW",ob[0],ob[1]);
 		end
-		//Error 5
+
 		ob[1] =  hazardMem[31:29];
 		ob[0] =  hazardMem[29:27];
-		sh = hazardMem[26:24];
-		i = ob[1];
 		if(ob[1] != ob[0]) begin
 			$display("%d %d RAW",ob[0],ob[1]);
 		end
-		//Error 6
+
 		ob[1] =  hazardMem[23:21];
 		ob[0] =  hazardMem[20:18];
-		sh = hazardMem[17:16];
-		i = ob[1];
 		if(ob[1] != ob[0]) begin
 			$display("%d %d RAW",ob[0],ob[1]);
 		end
-		//Error 7
+
 		ob[1] =  hazardMem[15:13];
 		ob[0] =  hazardMem[12:10];
-		sh = hazardMem[9:8];
-		i = ob[1];
 		if(ob[1] != ob[0]) begin
 			$display("%d %d RAW",ob[0],ob[1]);
 		end
-		//Error 8
+
 		ob[1] =  hazardMem[7:5];
 		ob[0] =  hazardMem[4:2];
-		sh = hazardMem[1:0];
-		i = ob[1];
 		if(ob[1] != ob[0]) begin
 			$display("%d %d RAW",ob[0],ob[1]);
 		end
