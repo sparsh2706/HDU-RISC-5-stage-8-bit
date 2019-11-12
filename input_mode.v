@@ -56,7 +56,7 @@ module check(instrMemBits,hazardMemBits,input_val,but_inp);
 			opc[6] = instrMemBits[15:14];
 			opc[7] = instrMemBits[7:6];
 
-	// ********************************************** Source Register ***********************************************************
+	// ********************************************** Source Register ********************************************************
 
 			if(opc[0] == 2'b10)
 			begin
@@ -249,79 +249,79 @@ module check(instrMemBits,hazardMemBits,input_val,but_inp);
 			ob[1] =  hazardMemBits[103:101];
 			ob[0] =  hazardMemBits[100:98];
 			if(ob[1] != ob[0]) begin
-				$display("%b %b RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[95:93];
 			ob[0] =  hazardMemBits[92:90];
 			if(ob[1] != ob[0]) begin
-				$display("%b %b RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[87:85];
 			ob[0] =  hazardMemBits[84:82];
 			if(ob[1] != ob[0]) begin
-				$display("%b %b RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[79:77];
 			ob[0] =  hazardMemBits[76:74];
 			if(ob[1] != ob[0]) begin
-				$display("%b %b RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[71:69];
 			ob[0] =  hazardMemBits[68:66];
 			if(ob[1] != ob[0]) begin
-				$display("%b %b RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 			
 			ob[1] =  hazardMemBits[63:61];
 			ob[0] =  hazardMemBits[60:58];
 			if(ob[1] != ob[0]) begin
-				$display("%b %b RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 				
 			ob[1] =  hazardMemBits[55:53];
 			ob[0] =  hazardMemBits[52:50];
 			if(ob[1] != ob[0]) begin
-				$display("%d %d RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[47:45];
 			ob[0] =  hazardMemBits[44:42];
 			if(ob[1] != ob[0]) begin
-				$display("%d %d RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[39:37];
 			ob[0] =  hazardMemBits[36:34];
 			if(ob[1] != ob[0]) begin
-				$display("%d %d RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[31:29];
 			ob[0] =  hazardMemBits[29:27];
 			if(ob[1] != ob[0]) begin
-				$display("%d %d RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[23:21];
 			ob[0] =  hazardMemBits[20:18];
 			if(ob[1] != ob[0]) begin
-				$display("%d %d RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[15:13];
 			ob[0] =  hazardMemBits[12:10];
 			if(ob[1] != ob[0]) begin
-				$display("%d %d RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 			ob[1] =  hazardMemBits[7:5];
 			ob[0] =  hazardMemBits[4:2];
 			if(ob[1] != ob[0]) begin
-				$display("%d %d RAW",ob[0],ob[1]);
+				$display("%d %d RAW",ob[1],ob[0]);
 			end
 
 		end
